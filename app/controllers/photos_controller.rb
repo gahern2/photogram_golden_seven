@@ -35,13 +35,14 @@ class PhotosController < ApplicationController
   end
 
   def update_row
+    the_id = params[:id]
     url = params[:da_source]
     cap = params[:da_caption]
-    new_photo = Photo.update
-    new_photo.source = url
-    new_photo.caption = cap
-    new_photo.save
-    redirect_to("photos/:id")
+    @my_photo = Photo.find(the_id)
+    @my_photo.source=url
+    @my_photo.caption=cap
+    @my_photo.save
+    redirect_to("/photos/#{the_id}")
   end
 
   def destroy_row
